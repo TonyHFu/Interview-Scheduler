@@ -1,10 +1,30 @@
 import DayListItem from "./DayListItem";
+import React from "react";
 
 const DayList = (props) => {
-  
+
+
+  const days = props.days.map(day => {
+    let selected = false;
+    
+    if (props.day === day.name) {
+      selected = true;
+    }
+    return (
+      <DayListItem 
+        key={day.id}
+        spots={day.spots}
+        name={day.name}
+        setDay={props.setDay}
+        selected={selected}
+      />
+    );
+  });
+
+
   return (
     <ul>
-
+      {days}
     </ul>
   );
 }
