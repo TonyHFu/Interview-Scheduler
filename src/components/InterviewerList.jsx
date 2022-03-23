@@ -5,7 +5,7 @@ import "components/InterviewerList.scss";
 
 export default function InterviewerList(props) {
   
-  const [interviewer, setInterviewer] = useState(props.interviewer);
+  const [interviewer, setInterviewer] = useState(props.value);
 
   const interviewers = props.interviewers.map(eachInterviewer => {
     return <InterviewerListItem
