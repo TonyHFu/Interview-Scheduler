@@ -1,3 +1,13 @@
 export function getAppointmentsForDay(state, day) {
-  state.days.filter(currentDay => currentDay.name === day)
+  if (state.days.length === 0) {
+    return [];
+  }
+  
+  const dayArr = state.days.filter(currentDay => currentDay.name === day);
+
+  if (dayArr.length === 0) {
+    return [];
+  } 
+  
+  return dayArr[0].appointments.map(currentAppointment => state.appointments[currentAppointment]);    
 }
