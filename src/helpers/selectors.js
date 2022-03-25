@@ -11,3 +11,14 @@ export function getAppointmentsForDay(state, day) {
   
   return dayArr[0].appointments.map(currentAppointment => state.appointments[currentAppointment]);    
 }
+
+export function getInterview(state, interview) {
+  if (!interview) {
+    return null;
+  }
+  const interviewer = state.interviewers[interview.interviewer];
+  return {
+    student: interview.student,
+    interviewer
+  }
+}
