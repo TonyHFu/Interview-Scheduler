@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import InterviewerListItem from "./InterviewerListItem";
 import "components/InterviewerList.scss";
 
 
 export default function InterviewerList(props) {
   
-  const [interviewer, setInterviewer] = useState(props.value);
 
   const interviewers = props.interviewers.map(eachInterviewer => {
     return <InterviewerListItem
