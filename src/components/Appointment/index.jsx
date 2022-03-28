@@ -59,7 +59,7 @@ export default function Appointment(props) {
         <Show 
           interviewer={props.interview.interviewer} 
           student={props.interview.student}
-          onDelete={() => onDelete(props.id)}
+          onDelete={() => transition(CONFIRM)}
         />
       )}
       {mode === CREATE && (
@@ -76,7 +76,11 @@ export default function Appointment(props) {
         <Status message="Deleting" />
       )}
       {mode === CONFIRM && (
-        <Confirm />
+        <Confirm 
+          onCancel={back}
+          onConfirm={() => onDelete(props.id)}
+          message="Are you sure you would like to delete?"
+        />
       )}
     </article>
   );
