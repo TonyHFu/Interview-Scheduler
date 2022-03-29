@@ -58,7 +58,7 @@ export default function useApplicationData() {
         };
 
         const days = updateSpots(state, appointments);
-
+        
         return {
           ...state,
           appointments,
