@@ -17,7 +17,7 @@ export default function Application(props) {
     setDay,
     bookInterview,
     cancelInterview,
-    setState
+    dispatch
   } = useApplicationData();
 
   const appointments = getAppointmentsForDay(state, state.day);
@@ -38,8 +38,6 @@ export default function Application(props) {
     );
   })
 
-  
-
   useEffect(() => {
     Promise.all([
       axios.get(`/api/days`),
@@ -47,11 +45,15 @@ export default function Application(props) {
       axios.get(`/api/interviewers`)
     ])
       .then(responses => {
-        setState(prev => ({
-          ...prev, days: responses[0].data, appointments: responses[1].data, interviewers: responses[2].data
-        }));
+        dispatch({ 
+          type: "SET_APPLICATION_DATA", 
+          days: responses[0].data, 
+          appointments: responses[1].data,
+          interviewers: responses[2].data 
+        });
+        
       })
-  }, [setState]);
+  }, []);
 
 
   

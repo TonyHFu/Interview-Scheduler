@@ -1,15 +1,46 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import axios from "axios";
+const SET_DAY = "SET_DAY";
+const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
+const SET_INTERVIEW = "SET_INTERVIEW";
 
 export default function useApplicationData() {
-  const [state, setState] = useState({
+
+  function reducer(state, action) {
+    switch (action.type) {
+      case SET_DAY:
+        return { 
+          ...state, 
+          day: action.day 
+        };
+      case SET_APPLICATION_DATA:
+        return {
+          ...state,
+          appointments: action.appointments,
+          days: action.days,
+          interviewers: action.interviewers
+        };
+      case SET_INTERVIEW:
+        return {
+          ...state,
+          appointments: action.appointments,
+          days: action.days
+        }; 
+      default:
+        throw new Error(
+          `Tried to reduce with unsupported action type: ${action.type}`
+        );
+    }
+  }
+  
+  const [state, dispatch] = useReducer(reducer, {
     day: "Monday",
     days: [],
     appointments: {},
     interviewers: {}
   });
   
-  const setDay = day => setState({ ...state, day });
+  const setDay = day => dispatch({ type: SET_DAY, day });
 
   const updateSpots = function(state, appointments) {
 
@@ -51,11 +82,7 @@ export default function useApplicationData() {
 
     return axios.put(`/api/appointments/${id}`, { interview })
       .then(() => {
-        setState({
-          ...state,
-          appointments,
-          days
-        });
+        dispatch({ type: SET_INTERVIEW, appointments, days });
       });
   }
   
@@ -72,13 +99,9 @@ export default function useApplicationData() {
     
     return axios.delete(`/api/appointments/${id}`)
       .then(() => {
-        setState({
-          ...state,
-          appointments,
-          days
-        })
+        dispatch({ type: SET_INTERVIEW, appointments, days });
       });
   }
 
-  return { state, setDay, bookInterview, cancelInterview, setState };
+  return { state, setDay, bookInterview, cancelInterview, dispatch };
 }
