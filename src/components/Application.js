@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import axios from "axios";
+import React from "react";
 
 import "components/Application.scss";
 import DayList from "./DayList";
@@ -17,7 +16,6 @@ export default function Application(props) {
     setDay,
     bookInterview,
     cancelInterview,
-    dispatch
   } = useApplicationData();
 
   const appointments = getAppointmentsForDay(state, state.day);
@@ -37,27 +35,6 @@ export default function Application(props) {
       />
     );
   })
-
-  useEffect(() => {
-    Promise.all([
-      axios.get(`/api/days`),
-      axios.get(`/api/appointments`),
-      axios.get(`/api/interviewers`)
-    ])
-      .then(responses => {
-        dispatch({ 
-          type: "SET_APPLICATION_DATA", 
-          days: responses[0].data, 
-          appointments: responses[1].data,
-          interviewers: responses[2].data 
-        });
-        
-      })
-  }, []);
-
-
-  
-  
 
   return (
     <main className="layout">
