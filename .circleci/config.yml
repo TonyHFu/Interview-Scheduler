@@ -27,12 +27,12 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "72:7d:d3:b6:90:4b:c5:ce:5d:37:58:4b:18:44:d0:f6"
+            - "8d:35:e2:24:e6:8c:13:d5:93:03:04:bd:10:7f:f0:fd"
       - checkout
       - run:
           name: Push Master to Production
           command: |
-            git push github.com:TonyHFu/Interview-Scheduler.git master:production
+            git push https://github.com/TonyHFu/Interview-Scheduler.git master:production
 workflows:
   version: 2
   test_and_deploy:
