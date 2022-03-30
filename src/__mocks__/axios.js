@@ -86,4 +86,10 @@ export default {
 			statusText: "No Content",
 		});
 	}),
+	delete: jest.fn((url, interview) => {
+		return Promise.resolve({
+			status: 204,
+			statusText: "No Content",
+		});
+	}),
 };
