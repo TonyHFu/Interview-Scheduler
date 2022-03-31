@@ -28,8 +28,8 @@ npm run storybook
 
 This app comes with WebSockets enabled, allowing realtime updates from different users.
 
-!["Cancelling appointment show in different tab"]()
+!["Cancelling appointment show in different tab"](https://github.com/TonyHFu/Interview-Scheduler/blob/master/docs/cancel-appointment.gif)
 
 ## Screenshot
 
-!["Appointment form"]()
+!["Appointment form"](https://github.com/TonyHFu/Interview-Scheduler/blob/master/docs/appointment-form.png)
