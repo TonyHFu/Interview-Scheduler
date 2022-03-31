@@ -1,6 +1,6 @@
 # Interview Scheduler
 
-This site can also be found at https://6244d908a6bb63273d06ba07--guileless-muffin-098264.netlify.app/
+This site can also be found at https://guileless-muffin-098264.netlify.app/
 
 ## Setup
 
