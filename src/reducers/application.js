@@ -3,9 +3,9 @@ const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
 const SET_INTERVIEW = "SET_INTERVIEW";
 
 function reducer(state, action) {
-	const updateSpots = function (state, appointments) {
+	const updateSpots = function (state, appointments, setInterviewDay) {
 		const thisDay = state.days.filter(
-			currentDay => currentDay.name === state.day
+			currentDay => currentDay.name === setInterviewDay
 		);
 		const appointmentsArr = thisDay[0].appointments.map(
 			currentAppointment => appointments[currentAppointment]
@@ -19,7 +19,7 @@ function reducer(state, action) {
 		}, 0);
 
 		const newDays = state.days.map(currentDay => {
-			if (currentDay.name === state.day) {
+			if (currentDay.name === setInterviewDay) {
 				return {
 					...currentDay,
 					spots,
@@ -54,7 +54,19 @@ function reducer(state, action) {
 				[action.id]: appointment,
 			};
 
-			const days = updateSpots(state, appointments);
+			const setInterviewDay = state.days.reduce((acc, currentDay) => {
+				if (acc) return acc;
+
+				currentDay.appointments.forEach(currentDayAppointments => {
+					if (currentDayAppointments === action.id) {
+						acc = currentDay.name;
+					}
+				});
+
+				return acc;
+			}, null);
+
+			const days = updateSpots(state, appointments, setInterviewDay);
 
 			return {
 				...state,
