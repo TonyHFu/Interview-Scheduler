@@ -34,6 +34,17 @@ export default function Form(props) {
 		props.onSave(student, interviewer);
 	}
 
+	const studentOnChange = event => {
+		if (event.target.value) {
+			setError(prev => ({ ...prev, student: "" }));
+		}
+		setStudent(event.target.value);
+	};
+
+	const interviewerOnChange = id => {
+		setError(prev => ({ ...prev, interviewer: "" }));
+		setInterviewer(id);
+	};
 	return (
 		<main className="appointment__card appointment__card--create">
 			<section className="appointment__card-left">
@@ -44,7 +55,7 @@ export default function Form(props) {
 						type="text"
 						placeholder="Enter Student Name"
 						value={student}
-						onChange={event => setStudent(event.target.value)}
+						onChange={studentOnChange}
 						data-testid="student-name-input"
 					/>
 
@@ -53,7 +64,7 @@ export default function Form(props) {
 					<InterviewerList
 						interviewers={props.interviewers}
 						value={interviewer}
-						onChange={setInterviewer}
+						onChange={interviewerOnChange}
 					/>
 
 					<section className="appointment__validation">
