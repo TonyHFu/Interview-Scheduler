@@ -25,6 +25,14 @@ export default function Form(props) {
 			return;
 		}
 
+		if (student.length > 50) {
+			setError({
+				...error,
+				student: `Student name cannot be longer than 50 characters (currently ${student.length})`,
+			});
+			return;
+		}
+
 		if (!interviewer) {
 			setError({ ...error, interviewer: "Must select an interviewer" });
 			return;
